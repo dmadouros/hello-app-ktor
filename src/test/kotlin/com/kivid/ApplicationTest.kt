@@ -1,26 +1,22 @@
 package com.kivid
 
-import io.ktor.server.routing.*
+import com.kivid.plugins.configureSerialization
+import com.kivid.user.configureListUsers
 import io.ktor.http.*
-import io.ktor.serialization.jackson.*
-import com.fasterxml.jackson.databind.*
-import io.ktor.server.plugins.*
-import io.ktor.server.html.*
-import kotlinx.html.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.request.*
-import kotlin.test.*
 import io.ktor.server.testing.*
-import com.kivid.plugins.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class ApplicationTest {
     @Test
-    fun testRoot() {
-        withTestApplication({ configureRouting() }) {
-            handleRequest(HttpMethod.Get, "/").apply {
+    fun testListUsers() {
+        withTestApplication({
+            configureListUsers()
+            configureSerialization()
+        }) {
+            handleRequest(HttpMethod.Get, "/users").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Hello World!", response.content)
+                assertEquals("[{\"id\":1,\"name\":\"Kim\",\"email\":\"kim@example.com\"}]", response.content)
             }
         }
     }
