@@ -1,6 +1,8 @@
+val exposedVersion: String by project
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
+val testcontainersVersion: String by project
 
 plugins {
     application
@@ -21,6 +23,9 @@ repositories {
 }
 
 dependencies {
+    implementation(platform("org.jetbrains.exposed:exposed-bom:$exposedVersion"))
+    implementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
+
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
@@ -28,6 +33,16 @@ dependencies {
     implementation("io.ktor:ktor-server-html-builder-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+
+    // Exposed
+    implementation("org.jetbrains.exposed:exposed-core")
+    implementation("org.jetbrains.exposed:exposed-dao")
+    implementation("org.jetbrains.exposed:exposed-jdbc")
+
+    // Liquibase / Postgres (at runtime)
+    implementation("org.postgresql:postgresql:42.3.2")
+    implementation("org.liquibase:liquibase-core:4.7.1")
+    implementation("org.yaml:snakeyaml:1.30")
 
     // Liquibase / Postgres (CLI)
     liquibaseRuntime("info.picocli:picocli:4.6.2")
@@ -37,6 +52,9 @@ dependencies {
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
 }
 
 tasks {
