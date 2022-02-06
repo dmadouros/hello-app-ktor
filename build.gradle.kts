@@ -28,6 +28,7 @@ dependencies {
     implementation(platform("org.jetbrains.exposed:exposed-bom:$exposedVersion"))
     implementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
 
+    // Ktor
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
@@ -39,6 +40,7 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api")
     implementation("org.apache.logging.log4j:log4j-core")
     implementation("org.apache.logging.log4j:log4j-slf4j18-impl")
+    implementation("com.mattbertolini:liquibase-slf4j:4.0.0")
 
     // Exposed
     implementation("org.jetbrains.exposed:exposed-core")
