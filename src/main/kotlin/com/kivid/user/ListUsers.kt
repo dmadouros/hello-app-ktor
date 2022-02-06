@@ -25,9 +25,3 @@ fun Application.configureListUsers(database: Database) {
         }
     }
 }
-
-object Users: Table() {
-    val id = long(name = "id")
-    val name = varchar(name = "name", length = 255)
-    val emailAddress = varchar(name = "email_address", length = 255)
-}
