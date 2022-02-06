@@ -1,7 +1,7 @@
 val exposedVersion: String by project
 val ktor_version: String by project
 val kotlin_version: String by project
-val logback_version: String by project
+val log4jVersion: String by project
 val testcontainersVersion: String by project
 
 plugins {
@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+    implementation(platform("org.apache.logging.log4j:log4j-bom:$log4jVersion"))
     implementation(platform("org.jetbrains.exposed:exposed-bom:$exposedVersion"))
     implementation(platform("org.testcontainers:testcontainers-bom:$testcontainersVersion"))
 
@@ -33,7 +34,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
     implementation("io.ktor:ktor-server-html-builder-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
+
+    // Log4j
+    implementation("org.apache.logging.log4j:log4j-api")
+    implementation("org.apache.logging.log4j:log4j-core")
+    implementation("org.apache.logging.log4j:log4j-slf4j18-impl")
 
     // Exposed
     implementation("org.jetbrains.exposed:exposed-core")
