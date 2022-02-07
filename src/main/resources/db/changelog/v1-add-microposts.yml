@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_microposts_table
+      author: David, Kim
+      changes:
+        - createTable:
+            tableName: microposts
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: micropost_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: content
+                  type: VARCHAR
+              - column:
+                  constraints:
+                    nullable: false
+                    foreignKeyName: micropost_user_id_fk
+                    references: users(id)
+                  name: user_id
+                  type: BIGINT

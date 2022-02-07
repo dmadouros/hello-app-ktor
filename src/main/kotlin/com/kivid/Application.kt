@@ -1,5 +1,6 @@
 package com.kivid
 
+import com.kivid.micropost.configureListMicroposts
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.kivid.plugins.*
@@ -25,6 +26,7 @@ fun main() {
         configureShowUser(database)
         configureDeleteUser(database)
         configureUpdateUser(database)
+        configureListMicroposts(database)
         configureSerialization()
         configureTemplating()
     }.start(wait = true)

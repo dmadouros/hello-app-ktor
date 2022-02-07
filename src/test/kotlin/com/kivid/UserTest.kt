@@ -28,7 +28,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @Testcontainers
-class ApplicationTest {
+class UserTest {
     companion object {
         @Container
         val postgresqlContainer = PostgreSQLContainer<Nothing>("postgres:12-alpine").apply {
